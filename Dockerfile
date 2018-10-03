@@ -24,6 +24,8 @@ RUN apt-get update \
     git \
     acl
 
+RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr
+
 RUN docker-php-ext-install -j$(nproc) \
     iconv \
     mcrypt \
@@ -36,8 +38,6 @@ RUN docker-php-ext-install -j$(nproc) \
     gd
 
 RUN docker-php-ext-configure intl
-
-RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr
 
 # Apache config
 RUN a2enmod rewrite ssl
