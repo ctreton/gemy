@@ -22,9 +22,12 @@ RUN apt-get update \
     gnupg \
     vim \
     git \
-    acl
+    acl \
+    cron
 
 RUN docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr
+
+RUN docker-php-ext-configure intl
 
 RUN docker-php-ext-install -j$(nproc) \
     iconv \
@@ -36,8 +39,6 @@ RUN docker-php-ext-install -j$(nproc) \
     pdo_mysql \
     soap \
     gd
-
-RUN docker-php-ext-configure intl
 
 # Apache config
 RUN a2enmod rewrite ssl
